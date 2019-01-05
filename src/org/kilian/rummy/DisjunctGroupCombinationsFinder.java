@@ -17,6 +17,17 @@ public class DisjunctGroupCombinationsFinder {
             computeAllDisjointCombinations(resultSet, mutuallyExcludingGroupsCalculator.getMutuallyExcludingGroupSet(), mutuallyExcludingGroupsCalculator.getMutuallyExcludingGroupMap(), new HashSet<>(), group);
         }
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        Set<List<Tile>> originallyDisjointGroups = origGroups;
+        originallyDisjointGroups.removeAll(mutuallyExcludingGroupsCalculator.getMutuallyExcludingGroupSet());
+        for (Set<List<Tile>> combination : resultSet) {
+            combination.addAll(originallyDisjointGroups);
+            result.add(new Groups(combination));
+        }
+        if (mutuallyExcludingGroupsCalculator.getMutuallyExcludingGroupSet().isEmpty()) {
+            result.add(new Groups(originallyDisjointGroups));
+        }
+
         return result;
     }
 

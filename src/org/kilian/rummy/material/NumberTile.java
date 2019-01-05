@@ -19,14 +19,14 @@ public class NumberTile implements Tile {
         return number;
     }
 
-    @Override
-    public String toString() {
-        return number + "_" + color.name();
-    }
-
+//    @Override
 //    public String toString() {
-//        return color.getCode() + number + (char)27 + "[0m";
+//        return number + "_" + color.name();
 //    }
+
+    public String toString() {
+        return color.getCode() + number + (char)27 + "[0m";
+    }
 
     @Override
     public boolean equals(Object o) {
