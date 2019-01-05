@@ -15,80 +15,26 @@ public class GroupResolverTest {
 
     @Test
     public void testFindGroups() {
+        long start = System.currentTimeMillis();
         GroupResolver groupResolver = new GroupResolver();
 
-        groupResolver.putNumberTile(new NumberTile(Color.BLACK, 1));
-        groupResolver.putNumberTile(new NumberTile(Color.GRAY, 1));
-        groupResolver.putNumberTile(new NumberTile(Color.MAGENTA, 1));
-        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 1));
-        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 2));
-        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 3));
-        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 4));
-        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 5));
+        for (int i = 1; i <= 3; i++) {
+            for (Color color : Color.values()) {
+                groupResolver.putNumberTile(new NumberTile(color, i));
+            }
+        }
+//        groupResolver.putNumberTile(new NumberTile(Color.BLACK, 1));
+//        groupResolver.putNumberTile(new NumberTile(Color.GRAY, 1));
+//        groupResolver.putNumberTile(new NumberTile(Color.MAGENTA, 1));
+//        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 1));
+//        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 2));
+//        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 3));
+//        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 4));
+//        groupResolver.putNumberTile(new NumberTile(Color.GREEN, 5));
 
-        Set<List<Tile>> result = groupResolver.findGroups().getGroups();
-        assertEquals(result.size(), 11);
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
+        List<Groups> result = groupResolver.findGroupCombinations();
 
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.GREEN, 2),
-                new NumberTile(Color.GREEN, 3),
-                new NumberTile(Color.GREEN, 4),
-                new NumberTile(Color.GREEN, 5)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.GREEN, 2),
-                new NumberTile(Color.GREEN, 3),
-                new NumberTile(Color.GREEN, 4)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 2),
-                new NumberTile(Color.GREEN, 3),
-                new NumberTile(Color.GREEN, 4),
-                new NumberTile(Color.GREEN, 5)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.GREEN, 2),
-                new NumberTile(Color.GREEN, 3)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 2),
-                new NumberTile(Color.GREEN, 3),
-                new NumberTile(Color.GREEN, 4)
-                )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GREEN, 3),
-                new NumberTile(Color.GREEN, 4),
-                new NumberTile(Color.GREEN, 5)
-        )));
+        System.out.println(System.currentTimeMillis() - start);
 
         System.out.println(result);
     }
@@ -105,33 +51,8 @@ public class GroupResolverTest {
         groupResolver.putNumberTile(new NumberTile(Color.GREEN, 4));
         groupResolver.putNumberTile(new NumberTile(Color.GREEN, 5));
 
-        Set<List<Tile>> result = groupResolver.findGroups().getGroups();
+        List<Groups> result = groupResolver.findGroupCombinations();
         assertEquals(result.size(), 5);
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
-        assertTrue(result.contains(Arrays.asList(
-                new NumberTile(Color.BLACK, 1),
-                new NumberTile(Color.GRAY, 1),
-                new NumberTile(Color.GREEN, 1),
-                new NumberTile(Color.MAGENTA, 1)
-        )));
+
     }
 }

@@ -24,7 +24,7 @@ public class GroupResolver {
     }
 
     public JokerTile putNumberTile(NumberTile tile) {
-        Tile[] positionForNumberAndColor = this.tileMatrix[tile.getNumber()][colorPositions.get(tile.getColor())];
+        Tile[] positionForNumberAndColor = this.tileMatrix[tile.getNumber() - 1][colorPositions.get(tile.getColor())];
         if (jokersReplacingNumberTiles.get(tile) != null) {
             JokerTile jokerTile = jokersReplacingNumberTiles.remove(tile);
             for (int i = 0; i < Constants.NUMBER_OF_TILE_DUPLICATES; i++) {
@@ -49,17 +49,11 @@ public class GroupResolver {
         jokerTiles.add(jokerTile);
     }
 
-    public Groups findGroups() {
-        return findAllGroupsIgnoringOverlaps();
-    }
-
-    private Groups findAllGroupsIgnoringOverlaps() {
+    public List<Groups> findGroupCombinations() {
 
         Groups allGroups = new RowGroupFinder().findAllRowGroupsIgnoringOverlaps(tileMatrix);
         allGroups.merge(new ColorGroupFinder().findAllColorGroupsIgnoringOverlaps(tileMatrix));
-        List<Groups> disjunctCombinations = new DisjunctGroupCombinationsFinder().findCombinations(allGroups);
-
-        return allGroups;
+        return new DisjunctGroupCombinationsFinder().findCombinations(allGroups);
     }
 
 }
